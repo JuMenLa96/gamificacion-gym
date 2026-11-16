@@ -7,6 +7,9 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         int opcion;
         String nombre;
+        Actividad cardio = new Actividad("cardio", "constitucion", 25);
+        Actividad gimnasio = new Actividad("Entrenamiento en gimnasio", "fuerza", 30);
+        Actividad lectura = new Actividad("leer", "sabiduria", 20);
 
         System.out.println("Bienvenido jugador. ¿Cual es tu nombre?");
         nombre = scan.nextLine();
@@ -25,7 +28,30 @@ public class Main {
                     jugador.verPerfil();
                     break;
                 case 2:
-                    jugador.registrarActividad(scan);
+                    cardio.mostrarActividad();
+                    gimnasio.mostrarActividad();
+                    lectura.mostrarActividad();
+                    System.out.println("¿Que actividad quieres realizar?");
+                    System.out.println("1- Correr");
+                    System.out.println("2- gimnasio");
+                    System.out.println("3- leer");
+                    int actividadElegida = scan.nextInt();
+                    scan.nextLine();
+                    switch (actividadElegida) {
+                        case 1:
+                            jugador.registrarActividad(cardio);
+                            break;
+                        case 2:
+                            jugador.registrarActividad(gimnasio);
+                            break;
+                        case 3:
+                            jugador.registrarActividad(lectura);
+                            break;
+                        default:
+                            System.out.println("Error, por favor elija un número del 1 al 3");
+                    }
+
+                    // jugador.registrarActividad(scan);
                     break;
                 case 3:
                     System.out.println("Los objetivos aun no estan implementados");

@@ -37,13 +37,9 @@ public class Personaje {
         carisma.mostrarEstadistica();
     }
 
-    public void registrarActividad(Scanner scan) {
-        System.out.println("¿Que estadistica has trabajado?");
-        String estadisticaTrabajada = scan.nextLine();
-        System.out.println("¿Cuanta experiencia recibiste?");
-        double experienciaGanada = scan.nextDouble();
-        scan.nextLine();
-        addExperiencia(estadisticaTrabajada, experienciaGanada);
+    public void registrarActividad(Actividad actividadRealizada) {
+
+        addExperiencia(actividadRealizada.getEstadisticaRelacionada(), actividadRealizada.getExperienciaBase());
     }
 
     private void addExperiencia(String estadisticaTrabajada, double experienciaGanada) {
