@@ -7,9 +7,9 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         int opcion;
         String nombre;
-        Actividad cardio = new Actividad("cardio", "constitucion", 25);
-        Actividad gimnasio = new Actividad("Entrenamiento en gimnasio", "fuerza", 30);
-        Actividad lectura = new Actividad("leer", "sabiduria", 20);
+        Actividad cardio = new Actividad("cardio", "constitucion", 25, "facil");
+        Actividad gimnasio = new Actividad("Entrenamiento en gimnasio", "fuerza", 30, "media");
+        Actividad lectura = new Actividad("leer", "sabiduria", 20, "facil");
 
         System.out.println("Bienvenido jugador. ¿Cual es tu nombre?");
         nombre = scan.nextLine();

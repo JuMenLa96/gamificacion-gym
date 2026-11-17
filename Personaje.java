@@ -1,6 +1,3 @@
-
-import java.util.Scanner;
-
 public class Personaje {
 
     private String nombre;
@@ -39,25 +36,38 @@ public class Personaje {
 
     public void registrarActividad(Actividad actividadRealizada) {
 
-        addExperiencia(actividadRealizada.getEstadisticaRelacionada(), actividadRealizada.getExperienciaBase());
+        addExperiencia(actividadRealizada.getEstadisticaRelacionada(), actividadRealizada.getExperienciaBase(),
+                actividadRealizada.getDificultad());
     }
 
-    private void addExperiencia(String estadisticaTrabajada, double experienciaGanada) {
+    private void addExperiencia(String estadisticaTrabajada, double experienciaBase, String dificultad) {
+        double experienciaFinal;
         String estadisticaNormalizada = estadisticaTrabajada.toLowerCase().trim();
+        String dificultadNormalizada = dificultad.toLowerCase().trim();
+        if (dificultadNormalizada.equals("facil")) {
+            experienciaFinal = experienciaBase * 1.0;
+        } else if (dificultadNormalizada.equals("media")) {
+            experienciaFinal = experienciaBase * 1.2;
+        } else if (dificultadNormalizada.equals("dificil")) {
+            experienciaFinal = experienciaBase * 1.5;
+        } else {
+            System.out.println("Error al obtener la dificultad");
+            return;
+        }
         if (estadisticaNormalizada.equals("fuerza")) {
-            fuerza.addExp(experienciaGanada);
+            fuerza.addExp(experienciaFinal);
         } else if (estadisticaNormalizada.equals("destreza")) {
-            destreza.addExp(experienciaGanada);
+            destreza.addExp(experienciaFinal);
 
         } else if (estadisticaNormalizada.equals("constitucion") || estadisticaNormalizada.equals("constitución")) {
-            constitucion.addExp(experienciaGanada);
+            constitucion.addExp(experienciaFinal);
 
         } else if (estadisticaNormalizada.equals("inteligencia")) {
-            inteligencia.addExp(experienciaGanada);
+            inteligencia.addExp(experienciaFinal);
         } else if (estadisticaNormalizada.equals("sabiduria") || estadisticaNormalizada.equals("sabiduría")) {
-            sabiduria.addExp(experienciaGanada);
+            sabiduria.addExp(experienciaFinal);
         } else if (estadisticaNormalizada.equals("carisma")) {
-            carisma.addExp(experienciaGanada);
+            carisma.addExp(experienciaFinal);
         } else {
             System.out.println("La estadistica no existe.");
         }

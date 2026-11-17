@@ -3,11 +3,13 @@ public class Actividad {
     private String nombre;
     private String estadisticaRelacionada;
     private double experienciaBase;
+    private String dificultad;
 
-    public Actividad(String nombre, String estadisticaRelacionada, double experienciaBase) {
+    public Actividad(String nombre, String estadisticaRelacionada, double experienciaBase, String dificultad) {
         this.nombre = nombre;
         this.estadisticaRelacionada = estadisticaRelacionada;
         this.experienciaBase = experienciaBase;
+        this.dificultad = dificultad;
     }
 
     public String getNombre() {
@@ -20,6 +22,10 @@ public class Actividad {
 
     public double getExperienciaBase() {
         return experienciaBase;
+    }
+
+    public String getDificultad() {
+        return dificultad;
     }
 
     public void mostrarActividad() {
