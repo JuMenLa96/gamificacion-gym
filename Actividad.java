@@ -32,5 +32,6 @@ public class Actividad {
         System.out.println("Actividad: " + nombre);
         System.out.println("Estadistica: " + estadisticaRelacionada);
         System.out.println("Experiencia: " + experienciaBase);
+        System.out.println("Dificultad: " + dificultad);
     }
 }
