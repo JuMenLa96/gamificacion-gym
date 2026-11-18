@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Main {
 
@@ -24,7 +25,8 @@ public class Main {
             System.out.println("1. Ver perfil");
             System.out.println("2. Registrar actividad");
             System.out.println("3. Ver objetivos");
-            System.out.println("4. Salir");
+            System.out.println("4. Mostrar historial");
+            System.out.println("5. salir");
             opcion = scan.nextInt();
             scan.nextLine();
             switch (opcion) {
@@ -67,12 +69,15 @@ public class Main {
                     System.out.println("Los objetivos aun no estan implementados");
                     break;
                 case 4:
+                    jugador.mostrarHistorial();
+                    break;
+                case 5:
                     System.out.println("Se ha acabado la aventura.");
                     break;
                 default:
                     System.out.println("Error, por favor elija un número del 1 al 4");
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
         scan.close();
     }
 

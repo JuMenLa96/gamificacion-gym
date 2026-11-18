@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.time.LocalDate;
+
 public class Personaje {
 
     private String nombre;
     private int nivel = 1;
     private double experiencia = 0;
+    private ArrayList<ActividadRealizada> actividadesRealizadas;
 
     private Estadistica fuerza;
     private Estadistica destreza;
@@ -19,6 +23,7 @@ public class Personaje {
         inteligencia = new Estadistica("Inteligencia");
         sabiduria = new Estadistica("Sabiduría");
         carisma = new Estadistica("Carisma");
+        actividadesRealizadas = new ArrayList<>();
 
     }
 
@@ -35,15 +40,9 @@ public class Personaje {
     }
 
     public void registrarActividad(Actividad actividadRealizada) {
-
-        addExperiencia(actividadRealizada.getEstadisticaRelacionada(), actividadRealizada.getExperienciaBase(),
-                actividadRealizada.getDificultad());
-    }
-
-    private void addExperiencia(String estadisticaTrabajada, double experienciaBase, String dificultad) {
         double experienciaFinal;
-        String estadisticaNormalizada = estadisticaTrabajada.toLowerCase().trim();
-        String dificultadNormalizada = dificultad.toLowerCase().trim();
+        double experienciaBase = actividadRealizada.getExperienciaBase();
+        String dificultadNormalizada = actividadRealizada.getDificultad().toLowerCase().trim();
         if (dificultadNormalizada.equals("facil")) {
             experienciaFinal = experienciaBase * 1.0;
         } else if (dificultadNormalizada.equals("media")) {
@@ -54,6 +53,15 @@ public class Personaje {
             System.out.println("Error al obtener la dificultad");
             return;
         }
+        addExperiencia(actividadRealizada.getEstadisticaRelacionada(), experienciaFinal);
+        ActividadRealizada registro = new ActividadRealizada(actividadRealizada,
+                LocalDate.now(), experienciaFinal);
+        actividadesRealizadas.add(registro);
+    }
+
+    private void addExperiencia(String estadisticaTrabajada, double experienciaFinal) {
+
+        String estadisticaNormalizada = estadisticaTrabajada.toLowerCase().trim();
         if (estadisticaNormalizada.equals("fuerza")) {
             fuerza.addExp(experienciaFinal);
         } else if (estadisticaNormalizada.equals("destreza")) {
@@ -70,6 +78,17 @@ public class Personaje {
             carisma.addExp(experienciaFinal);
         } else {
             System.out.println("La estadistica no existe.");
+        }
+    }
+
+    public void mostrarHistorial() {
+        if (actividadesRealizadas.size() == 0) {
+            System.out.println("Aún no se realizó ninguna actividad.");
+        } else {
+            System.out.println("Historial de actividades:");
+            for (int i = 0; i < actividadesRealizadas.size(); i++) {
+                actividadesRealizadas.get(i).mostrarRegistro();
+            }
         }
     }
 }
