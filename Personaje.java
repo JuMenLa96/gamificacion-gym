@@ -7,6 +7,7 @@ public class Personaje {
     private int nivel = 1;
     private double experiencia = 0;
     private ArrayList<ActividadRealizada> actividadesRealizadas;
+    private ArrayList<Racha> listaRachas;
 
     private Estadistica fuerza;
     private Estadistica destreza;
@@ -24,6 +25,7 @@ public class Personaje {
         sabiduria = new Estadistica("Sabiduría");
         carisma = new Estadistica("Carisma");
         actividadesRealizadas = new ArrayList<>();
+        listaRachas = new ArrayList<>();
 
     }
 
@@ -42,17 +44,33 @@ public class Personaje {
     public void registrarActividad(Actividad actividadRealizada) {
         double experienciaFinal;
         double experienciaBase = actividadRealizada.getExperienciaBase();
+        double multiplicador;
+        LocalDate fecha = LocalDate.now();
+        Racha rachaEncontrada = null;
+        for (Racha racha : listaRachas) {
+            if (racha.getActividad() == actividadRealizada) {
+                rachaEncontrada = racha;
+                break;
+            }
+            if (rachaEncontrada == null) {
+                rachaEncontrada = new Racha(actividadRealizada);
+                listaRachas.add(rachaEncontrada);
+            }
+        }
+        rachaEncontrada.actualizarRacha(fecha);
+        multiplicador = rachaEncontrada.obtenerMultiplicador();
         String dificultadNormalizada = actividadRealizada.getDificultad().toLowerCase().trim();
         if (dificultadNormalizada.equals("facil")) {
-            experienciaFinal = experienciaBase * 1.0;
+            experienciaFinal = experienciaBase * 1.0 * multiplicador;
         } else if (dificultadNormalizada.equals("media")) {
-            experienciaFinal = experienciaBase * 1.2;
+            experienciaFinal = experienciaBase * 1.2 * multiplicador;
         } else if (dificultadNormalizada.equals("dificil")) {
-            experienciaFinal = experienciaBase * 1.5;
+            experienciaFinal = experienciaBase * 1.5 * multiplicador;
         } else {
             System.out.println("Error al obtener la dificultad");
             return;
         }
+
         addExperiencia(actividadRealizada.getEstadisticaRelacionada(), experienciaFinal);
         ActividadRealizada registro = new ActividadRealizada(actividadRealizada,
                 LocalDate.now(), experienciaFinal);
