@@ -48,15 +48,16 @@ public class Personaje {
         LocalDate fecha = LocalDate.now();
         Racha rachaEncontrada = null;
         for (Racha racha : listaRachas) {
-            if (racha.getActividad() == actividadRealizada) {
+            if (racha.getActividad().equals(actividadRealizada)) {
                 rachaEncontrada = racha;
                 break;
             }
-            if (rachaEncontrada == null) {
-                rachaEncontrada = new Racha(actividadRealizada);
-                listaRachas.add(rachaEncontrada);
-            }
         }
+        if (rachaEncontrada == null) {
+            rachaEncontrada = new Racha(actividadRealizada);
+            listaRachas.add(rachaEncontrada);
+        }
+
         rachaEncontrada.actualizarRacha(fecha);
         multiplicador = rachaEncontrada.obtenerMultiplicador();
         String dificultadNormalizada = actividadRealizada.getDificultad().toLowerCase().trim();

@@ -9,6 +9,7 @@ public class Main {
         int opcion;
         int actividadElegida;
         String nombre;
+        LocalDate fechaInicial = LocalDate.now();
         Actividad cardio = new Actividad("cardio", "constitucion", 25, "facil");
         Actividad gimnasio = new Actividad("Entrenamiento en gimnasio", "fuerza", 30, "media");
         Actividad lectura = new Actividad("leer", "sabiduria", 20, "facil");
@@ -19,6 +20,8 @@ public class Main {
         System.out.println("Bienvenido jugador. ¿Cual es tu nombre?");
         nombre = scan.nextLine();
         Personaje jugador = new Personaje(nombre);
+        Misiones misionesIniciales = new Misiones();
+        misionesIniciales.crearMisionesIniciales(fechaInicial);
         System.out.println("Comienza tu aventura, " + nombre + ".");
         do {
             System.out.println("¿Que quieres hacer? (1-4)");
